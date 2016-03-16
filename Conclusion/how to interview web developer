@@ -1,23 +1,23 @@
-µÚÒ»²¿·Ö£º Object Prototype(¶ÔÏóÔ­ĞÍ)
-    ¶¨ÒåÒ»¸ö·½·¨£¬´«ÈëÒ»¸öStringÀàĞÍµÄ²ÎÊı£¬È»ºó½«stringÃ¿¸ö×Ö·û¼Ó¸ö¿Õ¸ñ·µ»Ø£¬ÀıÈç:
+ç¬¬ä¸€éƒ¨åˆ†ï¼š Object Prototype(å¯¹è±¡åŸå‹)
+    å®šä¹‰ä¸€ä¸ªæ–¹æ³•ï¼Œä¼ å…¥ä¸€ä¸ªStringç±»å‹çš„å‚æ•°ï¼Œç„¶åå°†stringæ¯ä¸ªå­—ç¬¦åŠ ä¸ªç©ºæ ¼è¿”å›ï¼Œä¾‹å¦‚:
         spacify('hello world'); // =>'h e l l o w o r l d'
         function spacify(str) {
             return str.split('').join(' ');
         }
-    ½ô½Ó×Å£¬ÈçºÎ°ÑÕâ¸ö·½·¨·Åµ½stirngÉÏÃæ£¬ÀıÈç£º
-        ¡®hello world¡¯.spacify();
-    ÎÊÕâ¸öÎÊÌâÊ±Í¨³£¿¼²ìÎÒÃÇÊÇ·ñ¶Ôfunction prototype(·½·¨Ô­ĞÍ)ÓĞÒ»¸ö»ù±¾µÄÀí½â¡£
+    ç´§æ¥ç€ï¼Œå¦‚ä½•æŠŠè¿™ä¸ªæ–¹æ³•æ”¾åˆ°stirngä¸Šé¢ï¼Œä¾‹å¦‚ï¼š
+        â€˜hello worldâ€™.spacify();
+    é—®è¿™ä¸ªé—®é¢˜æ—¶é€šå¸¸è€ƒå¯Ÿæˆ‘ä»¬æ˜¯å¦å¯¹function prototype(æ–¹æ³•åŸå‹)æœ‰ä¸€ä¸ªåŸºæœ¬çš„ç†è§£ã€‚
         string.prototype.spacify = function(){
             return this.split('').join(' ');
         };
 
-µÚ¶ş²¿·Ö£º ²ÎÊıarguments
-      ¶¨ÒåÒ»¸ölog('hello world')/»ò´«Èë¶à¸ö²ÎÊı
+ç¬¬äºŒéƒ¨åˆ†ï¼š å‚æ•°arguments
+      å®šä¹‰ä¸€ä¸ªlog('hello world')/æˆ–ä¼ å…¥å¤šä¸ªå‚æ•°
           function log(){
             console.log.apply(console,arguments);
           };
-      ½ÓÏÂÀ´£¬¸øÃ¿Ò»¸ölogÏûÏ¢¼ÓÒ»¸ö(app)µÄÇ°×º¡£±ÈÈç£º'(app)hello world'
-        ÒòÎªargumentsÊÇÒ»¸öÎ±Êı×é£¬È»ºó½«Ëû×ª»¯Îª±ê×¼Êı×é¡£Í¨³£Ê¹ÓÃArray.prototype.slice()
+      æ¥ä¸‹æ¥ï¼Œç»™æ¯ä¸€ä¸ªlogæ¶ˆæ¯åŠ ä¸€ä¸ª(app)çš„å‰ç¼€ã€‚æ¯”å¦‚ï¼š'(app)hello world'
+        å› ä¸ºargumentsæ˜¯ä¸€ä¸ªä¼ªæ•°ç»„ï¼Œç„¶åå°†ä»–è½¬åŒ–ä¸ºæ ‡å‡†æ•°ç»„ã€‚é€šå¸¸ä½¿ç”¨Array.prototype.slice()
             function log() {
                 var args = Array.prototype.slice.call(arguments);
                 args.unshift('(app)');
@@ -25,22 +25,22 @@
                 console.log.apply(console,args);
             };
 
-µÚÈı²¿·Ö£º ÉÏÏÂÎÄ
-    ¶ÔÉÏÏÂÎÄºÍthisµÄÀí½â¡£
+ç¬¬ä¸‰éƒ¨åˆ†ï¼š ä¸Šä¸‹æ–‡
+    å¯¹ä¸Šä¸‹æ–‡å’Œthisçš„ç†è§£ã€‚
     var User = {
         count:1,
         getCount:function(){
-            return this.count;  // ·µ»Ø1
+            return this.count;  // è¿”å›1
         }
     };
     console.log(User.getCount());
 
-    var func = User.getCount; // getCountÀïthisÖ¸ÏòµÄÊÇfunc
+    var func = User.getCount; // getCounté‡ŒthisæŒ‡å‘çš„æ˜¯func
     console.log(func); // undefined
 
     var func = User.getCount.bind(User);
         console.log(func); // 1
-    Èç¹ûÕâ¸ö·½·¨¶ÔÀÏ°æ±¾ä¯ÀÀÆ÷²»Æğ×÷ÓÃ£¬ÄÇÃ´£º
+    å¦‚æœè¿™ä¸ªæ–¹æ³•å¯¹è€ç‰ˆæœ¬æµè§ˆå™¨ä¸èµ·ä½œç”¨ï¼Œé‚£ä¹ˆï¼š
     function.prototype.bind = function.bind || function(context){
         var me = this;
         return function(){
@@ -48,9 +48,9 @@
         };
     };
 
-µÚËÄ²¿·Ö£º µ¯³ö´°¿Ú(Overlay library)
-×öÒ»¸ö¡°µ¯³ö´°¿ÚµÄ¿â¡±
-ÔÚÕÚÕÖÖĞ×îºÃÊ¹ÓÃpositionÖĞµÄfixed´úÌæabsoluteÊôĞÔ£¬ÕâÑù¼´Ê¹ÔÚ¹ö¶¯Ê±Ò²ÄÜÊ¼ÖÕÈÃÕÚÕÖ¸Ç×¡¸Ç×¡Õû¸ö´°¿Ú¡£
+ç¬¬å››éƒ¨åˆ†ï¼š å¼¹å‡ºçª—å£(Overlay library)
+åšä¸€ä¸ªâ€œå¼¹å‡ºçª—å£çš„åº“â€
+åœ¨é®ç½©ä¸­æœ€å¥½ä½¿ç”¨positionä¸­çš„fixedä»£æ›¿absoluteå±æ€§ï¼Œè¿™æ ·å³ä½¿åœ¨æ»šåŠ¨æ—¶ä¹Ÿèƒ½å§‹ç»ˆè®©é®ç½©ç›–ä½ç›–ä½æ•´ä¸ªçª—å£ã€‚
         .overlay {
             position:fixed,
             left:0px,
@@ -59,18 +59,18 @@
             top:0,
             background:rgba(0,0,0,.8);
         }
-    È·±£µ±ÕÚÕÖ±»µã»÷Ê±×Ô¶¯¹Ø±Õ£º
+    ç¡®ä¿å½“é®ç½©è¢«ç‚¹å‡»æ—¶è‡ªåŠ¨å…³é—­ï¼š
         $('.overlay').click(closeOVerlay);
-    ¸Ä½ø£º
+    æ”¹è¿›ï¼š
     $('.overlay').click(function(e){
         if(e.target == e.currenttarget){
             closeOverlay();
         }
     });
 
-µÚÎå²¿·Ö£º ÆäËû·½Ãæ
-    ĞÔÄÜ£¬HTML5 API£¬AMDºÍCommonJsÄ£¿éÄ£ĞÍ£¬¹¹Ôìº¯Êı(Constructors)£¬ÀàĞÍºÍºĞ×ÓÄ£ĞÍ(box model)¡£
+ç¬¬äº”éƒ¨åˆ†ï¼š å…¶ä»–æ–¹é¢
+    æ€§èƒ½ï¼ŒHTML5 APIï¼ŒAMDå’ŒCommonJsæ¨¡å—æ¨¡å‹ï¼Œæ„é€ å‡½æ•°(Constructors)ï¼Œç±»å‹å’Œç›’å­æ¨¡å‹(box model)ã€‚
 
 
-£¨arguments£ºÊÇÒ»¸öÀàËÆÊı×éÈ´²»ÊÇÊı×éµÄ¶ÔÏó£¬ËµËûÀàËÆÊı×éÊÇÒòÎªÆä¾ß±¸ÏàÍ¬µÄ·ÃÎÊĞÔÖÊ¼°·½Ê½£¬ÄÜ¹»ÓÉarguments[n]À´·ÃÎÊ¶ÔÓ¦µÄµ¥¸ö²ÎÊıµÄÖµ£¬²¢ÓµÓĞÊı×é³¤¶ÈÊôĞÔlength£©
-Õª×ÔÄ½¿ÎÍø £ºÈçºÎÃæÊÔÇ°¶Ë¹¤³ÌÊ¦£ºGithubºÜÖØÒª
+ï¼ˆargumentsï¼šæ˜¯ä¸€ä¸ªç±»ä¼¼æ•°ç»„å´ä¸æ˜¯æ•°ç»„çš„å¯¹è±¡ï¼Œè¯´ä»–ç±»ä¼¼æ•°ç»„æ˜¯å› ä¸ºå…¶å…·å¤‡ç›¸åŒçš„è®¿é—®æ€§è´¨åŠæ–¹å¼ï¼Œèƒ½å¤Ÿç”±arguments[n]æ¥è®¿é—®å¯¹åº”çš„å•ä¸ªå‚æ•°çš„å€¼ï¼Œå¹¶æ‹¥æœ‰æ•°ç»„é•¿åº¦å±æ€§lengthï¼‰
+æ‘˜è‡ªæ…•è¯¾ç½‘ ï¼šå¦‚ä½•é¢è¯•å‰ç«¯å·¥ç¨‹å¸ˆï¼šGithubå¾ˆé‡è¦
