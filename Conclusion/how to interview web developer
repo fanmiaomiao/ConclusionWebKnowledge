@@ -1,0 +1,76 @@
+第一部分： Object Prototype(对象原型)
+    定义一个方法，传入一个String类型的参数，然后将string每个字符加个空格返回，例如:
+        spacify('hello world'); // =>'h e l l o w o r l d'
+        function spacify(str) {
+            return str.split('').join(' ');
+        }
+    紧接着，如何把这个方法放到stirng上面，例如：
+        ‘hello world’.spacify();
+    问这个问题时通常考察我们是否对function prototype(方法原型)有一个基本的理解。
+        string.prototype.spacify = function(){
+            return this.split('').join(' ');
+        };
+
+第二部分： 参数arguments
+      定义一个log('hello world')/或传入多个参数
+          function log(){
+            console.log.apply(console,arguments);
+          };
+      接下来，给每一个log消息加一个(app)的前缀。比如：'(app)hello world'
+        因为arguments是一个伪数组，然后将他转化为标准数组。通常使用Array.prototype.slice()
+            function log() {
+                var args = Array.prototype.slice.call(arguments);
+                args.unshift('(app)');
+
+                console.log.apply(console,args);
+            };
+
+第三部分： 上下文
+    对上下文和this的理解。
+    var User = {
+        count:1,
+        getCount:function(){
+            return this.count;  // 返回1
+        }
+    };
+    console.log(User.getCount());
+
+    var func = User.getCount; // getCount里this指向的是func
+    console.log(func); // undefined
+
+    var func = User.getCount.bind(User);
+        console.log(func); // 1
+    如果这个方法对老版本浏览器不起作用，那么：
+    function.prototype.bind = function.bind || function(context){
+        var me = this;
+        return function(){
+            return me.apply(context,arguments);
+        };
+    };
+
+第四部分： 弹出窗口(Overlay library)
+做一个“弹出窗口的库”
+在遮罩中最好使用position中的fixed代替absolute属性，这样即使在滚动时也能始终让遮罩盖住盖住整个窗口。
+        .overlay {
+            position:fixed,
+            left:0px,
+            right:0px;
+            bottom:0,
+            top:0,
+            background:rgba(0,0,0,.8);
+        }
+    确保当遮罩被点击时自动关闭：
+        $('.overlay').click(closeOVerlay);
+    改进：
+    $('.overlay').click(function(e){
+        if(e.target == e.currenttarget){
+            closeOverlay();
+        }
+    });
+
+第五部分： 其他方面
+    性能，HTML5 API，AMD和CommonJs模块模型，构造函数(Constructors)，类型和盒子模型(box model)。
+
+
+（arguments：是一个类似数组却不是数组的对象，说他类似数组是因为其具备相同的访问性质及方式，能够由arguments[n]来访问对应的单个参数的值，并拥有数组长度属性length）
+摘自慕课网 ：如何面试前端工程师：Github很重要
