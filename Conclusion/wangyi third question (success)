@@ -1,0 +1,97 @@
+#include <iostream>  
+#include <cstdio>  
+#include <cstdlib>  
+#include <vector>  
+   
+using namespace std;  
+   
+/*计算矩形区域（bx,by）（ex,ey）中蘑菇的数量*/  
+int count(vector<vector<int>> &v, int bx, int by, int ex, int ey)  
+{  
+    if (bx > ex || by > ey)  
+    {  
+        return 0;  
+    }//if  
+   
+    /*扫描镜每个格子内只能清理一个蘑菇*/  
+    int ret = 0;  
+    for (int i = bx; i <= ex; ++i)  
+    {  
+        for (int j = by; j <= ey; ++j)  
+        {  
+            ret = v[i][j] > 0 ? ret + 1 : ret;  
+        }//for  
+    }//for  
+    return ret;  
+}  
+   
+int main()  
+{  
+    int N, M, K;  
+    while (scanf("%d %d %d", &N, &M, &K) != EOF)  
+    {  
+        if (N < 3)  
+        {  
+            N = 3;  
+        }//if  
+        if (M < 3)  
+        {  
+            M = 3;  
+        }//if  
+   
+        vector<vector<int>> v(N+1, vector<int>(M+1, 0));  
+        for (int i = 0; i < K; ++i)  
+        {  
+            int x, y;  
+            scanf("%d %d", &x, &y);  
+            ++v[x-1][y-1];  
+        }//for  
+   
+        int begX = 0, begY = 0;  
+        /*使用第一个扫描镜*/  
+        int maxNum = 0, maxSum = 0;  
+        for (int i = 0; i <= N - 3; ++i)  
+        {  
+            for (int j = 0; j <= M - 3; ++j)  
+            {  
+                int num = count(v, i, j, i + 2, j + 2);  
+                if (num > maxNum)  
+                {  
+                    begX = i;  
+                    begY = j;  
+                    maxNum = num;  
+                }//if  
+            }//for  
+        }//for  
+        maxSum += maxNum;  
+        /*更新v，使用第二个扫描镜*/  
+        for (int i = begX; i < begX + 3; ++i)  
+        {  
+            for (int j = begY; j < begY + 3; ++j)  
+            {  
+                if (v[i][j] > 0)  
+                    --v[i][j];  
+            }//for  
+        }//for  
+   
+        maxNum = 0;  
+        for (int i = 0; i <= N - 3; ++i)  
+        {  
+            for (int j = 0; j <= M - 3; ++j)  
+            {  
+                int num = count(v, i, j, i + 2, j + 2);  
+                if (num > maxNum)  
+                {  
+                    begX = i;  
+                    begY = j;  
+                    maxNum = num;  
+                }//if  
+            }//for  
+        }//for  
+        maxSum += maxNum;  
+   
+        printf("%d\n", maxSum);  
+    }//while  
+    //system("pause");  
+    return 0;  
+}  
